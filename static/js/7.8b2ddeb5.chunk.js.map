@@ -1,0 +1,1 @@
+{"version":3,"sources":["pages/NotFoundPage.js"],"names":["NotFoundPage"],"mappings":"mMAAe,SAASA,IACtB,OACE,4CACY,uBADZ","file":"static/js/7.8b2ddeb5.chunk.js","sourcesContent":["export default function NotFoundPage() {\r\n  return (\r\n    <h2>\r\n      Error 404 <br />\r\n      Sorry, but there is no such page on the site.\r\n    </h2>\r\n  );\r\n}\r\n"],"sourceRoot":""}
