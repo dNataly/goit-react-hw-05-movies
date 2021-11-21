@@ -1,13 +1,146 @@
+@import-normalize;
+
+html {
+  box-sizing: border-box;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style-type: none;
+}
+
+.link {
+  text-decoration: none;
+}
+
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+  color: #212121;
+  background-color: #fff;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.icon-spin {
+  margin-right: 10px;
+  animation: icon-spin 2s infinite linear;
+}
+
+@keyframes icon-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(359deg);
+  }
+}
+
+.trending__today {
+  margin-top: 20px;
+}
+
+.trending__today--movie:not(:last-child) {
+  margin-bottom: 7px;
+}
+
+.container__card {
+  display: flex;
+}
+
+.movie__description {
+  padding: 20px;
+}
+
+.movie__title {
+  margin-bottom: 25px;
+}
+
+.movie__item {
+  display: flex;
+}
+.movie__list:not(:last-child) {
+  margin-right: 10px;
+}
+
+.movie__img {
+  max-width: 240px;
+}
+
+.movie__info--item {
+  display: flex;
+  flex-direction: column;
+    list-style: disc;
+}
+
+.movie__info--item li {
+    list-style-type: disc;
+}
+
+.movie__info--list {
+  margin-bottom: 10px;
+}
+
+.info__title {
+  margin: 20px 0;
+}
+
+.actor__img {
+  max-width: 100px;
+  margin-top: 15px;
+  margin-bottom: 20px;
+}
+
+.actor__name {
+  margin-bottom: 15px;
+}
+
+.reviews__text {
+  margin: 15px 0;
+}
+
+.input__search {
+  width: 300px;
+}
+
+.input__search:focus {
+    box-sizing: border-box;
+    outline: none;
+    border: 1px solid rgba(194, 27, 27, 0.9);
+}
+
+.spinner {
+  text-align: center;
+  margin-top: 20px;
 }

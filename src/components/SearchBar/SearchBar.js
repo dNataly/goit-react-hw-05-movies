@@ -1,32 +1,44 @@
-import { useState } from "react";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import s from "./SearchBar.module.css";
+import { useState } from 'react';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import PropTypes from 'prop-types';
 
-export default function SearchBar({ onSubmit }) {
-  const [requestName, setRequestName] = useState("");
+export default function Searchbar({ onSubmit }) {
+  const [requestName, setRequestName] = useState('');
 
-  const handleNameChange = (e) => {
-    setRequestName(e.currentTarget.value.toLowerCase());
+  const handleNameChange = event => {
+    setRequestName(event.currentTarget.value.toLowerCase());
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = event => {
+    event.preventDefault();
 
-    if (requestName.trim() === "") {
-      return toast.error("Please enter a correct name");
+    if (requestName.trim() === '') {
+      return toast.error('Please enter a correct name!');
     }
 
     onSubmit(requestName);
-    setRequestName("");
+    setRequestName('');
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input className={s.searchInput} placeholder="Search movie by name" value="requestName" onChange={handleNameChange}></input>
-      <button type="submit" className={s.searchBtn}>
-        Search
+    <form onSubmit={handleSubmit} className="reviews__text">
+      <input
+        className="input__search"
+        type="text"
+        autoComplete="off"
+        autoFocus
+        placeholder="Search movie by name"
+        value={requestName}
+        onChange={handleNameChange}
+      />
+      <button type="submit" className="button__search">
+        <span>Search</span>
       </button>
     </form>
   );
 }
+
+Searchbar.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+};

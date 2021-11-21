@@ -1,27 +1,30 @@
-import { useState, useEffect } from "react";
-import { ToastContainer } from "react-toastify";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { Link, useRouteMatch, useHistory, useLocation } from "react-router-dom";
-import * as API from "../services/fetchMovies";
-import SearchBar from "../components/SearchBar/SearchBar";
-import Spinner from "../components/Spinner/Spinner";
+import { useState, useEffect } from 'react';
+import { ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { Link, useRouteMatch, useHistory, useLocation } from 'react-router-dom';
+import * as APP from '../services/fetchMovies';
+import Searchbar from '../components/Searchbar/Searchbar';
+import Spinner from '../components/Spinner/Spinner';
 
 const Status = {
-  IDLE: "idle",
-  PENDING: "pending",
-  RESOLVED: "resolved",
-  REJECTED: "rejected",
+  IDLE: 'idle',
+  PENDING: 'pending',
+  RESOLVED: 'resolved',
+  REJECTED: 'rejected',
 };
 
 export default function MoviesPage() {
-  const [keyword, setKeyword] = useState("");
+  const [keyword, setKeyword] = useState('');
   const [movies, setMovies] = useState(null);
   const [status, setStatus] = useState(Status.IDLE);
   const { url } = useRouteMatch();
   const location = useLocation();
   const history = useHistory();
-  const sortQuery = new URLSearchParams(location.search).get("query") ?? "";
+
+  const sortQuery = new URLSearchParams(location.search).get('query') ?? '';
+
+  // console.log(sortQuery);
 
   useEffect(() => {
     if (!sortQuery) {
@@ -31,23 +34,26 @@ export default function MoviesPage() {
     function moviesApiService() {
       setStatus(Status.PENDING);
 
-      API.fetchMoviesByKeyword(sortQuery)
-        .then((movie) => {
+      APP.fetchMovieByKeyword(sortQuery)
+        .then(movie => {
           if (movie.length === 0) {
             setStatus(Status.REJECTED);
-            toast.error("Something went wrong! Please enter correct request");
+            toast.error(
+              'Something went wrong! Please enter a correct request.',
+            );
             return;
           }
+
           setMovies(movie);
           setStatus(Status.RESOLVED);
-          // toast.success('Congratulations!')
         })
         .catch(() => setStatus(Status.REJECTED));
     }
+
     moviesApiService();
   }, [sortQuery]);
 
-  const handleFormSubmit = (keyword) => {
+  const handleFormSubmit = keyword => {
     setKeyword(keyword);
 
     history.push({
@@ -58,21 +64,22 @@ export default function MoviesPage() {
 
   return (
     <>
-      <SearchBar onSubmit={handleFormSubmit} />
+      <Searchbar onSubmit={handleFormSubmit} />
 
       {status === Status.PENDING && <Spinner />}
 
       <ul>
         {movies &&
-          movies.map((movie) => (
-            <li key={movie.id}>
+          movies.map(movie => (
+            <li key={movie.id} className="trending__today--movie">
               <Link
                 to={{
                   pathname: `${url}/${movie.id}`,
                   state: {
                     from: { location },
                   },
-                }}>
+                }}
+              >
                 {movie.title}
               </Link>
             </li>
